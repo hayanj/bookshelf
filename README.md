@@ -14,18 +14,18 @@ Developers who wishes to work on this project should already have Python3, pip a
 #### Backend
 
 
-From the backend folder, run '''pip install requirements.txt'''. All required packages are included in the requirements file.
+From the backend folder, run '''bash pip install requirements.txt'''. All required packages are included in the requirements file.
 
 To run this application, run the following commands:
-'''
+'''bash
 export FLASK_APP=flaskr
 export FLASK_ENV=development
 flask run
 '''
 
-* ''' export FLASK_APP=flaskr ''' this command will insure that Flask is going to use __init__.py in our flaskr folder.
-* ''' export FLASK_ENV=development ''' this command will insure that we will be working in development mode, which will show us an interactive debugger in the console and resart the server whenever a change is made.
-* ''' flask run ''' this command will start the application.
+* '''bash export FLASK_APP=flaskr ''' this command will insure that Flask is going to use __init__.py in our flaskr folder.
+* '''bash export FLASK_ENV=development ''' this command will insure that we will be working in development mode, which will show us an interactive debugger in the console and resart the server whenever a change is made.
+* '''bash flask run ''' this command will start the application.
 
 The application is run on http://127.0.0.1:5000/ by default and is a proxy in the frontend configuration.
 
@@ -33,7 +33,7 @@ The application is run on http://127.0.0.1:5000/ by default and is a proxy in th
 
 
 From the frontend folder, run 
-'''
+'''bash
 npm install // only once to install dependencies
 npm start 
 '''

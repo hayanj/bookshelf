@@ -98,7 +98,7 @@ def create_app(test_config=None):
 
             books = Book.query.order_by(id).all()
             paginated_books = paginate_books(request, books)
-            
+
             return jsonify({
                 'success': True,
                 'created': book.id,
@@ -107,5 +107,37 @@ def create_app(test_config=None):
                 })
         except:
             abort(422)
+    
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+            'success': False,
+            'message': 'resource not found',
+            'error': 404
+        }), 404
+    
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+            'success': False,
+            'message': 'resource unprocessable',
+            'error': 422
+        }), 422
+    
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'message': 'Bad request',
+            'error': 400
+        }), 400
+    
+    @app.errorhandler(405)
+    def method_not_allowed(error):
+        return jsonify({
+            'success': False,
+            'message': 'method not allowed',
+            'error': 405
+        }), 405
 
     return app

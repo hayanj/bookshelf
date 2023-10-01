@@ -41,7 +41,8 @@ Returns:
 * A list of book objects, success value, and total number of books.
 * Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
 
-Sample: ```curl
+Sample: 
+```curl
 curl http://127.0.0.1:5000/books
 ```
 ```json
@@ -109,7 +110,8 @@ Returns:
 * A list of new book id, book objects, success value, and total number of books and book list based on current page number to update the frontend.
 * Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
 
-Sample: ```curl
+Sample: 
+```curl
 curl http://127.0.0.1:5000/books?page=3 -X POST -H "Content-Type: application/json" -d '{"title":"Neverwhere", "author":"Neil Gaiman", "rating":"5"}'
 ```
 ```json
@@ -137,7 +139,8 @@ Returns:
 * A list of deleted book id, book objects, success value, and total number of books and book list based on current page number to update the frontend.
 * Results are paginated in groups of 8. Include a request argument to choose page number, starting from 1.
 
-Sample: ```curl
+Sample: 
+```curl
 curl -X DELETE http://127.0.0.1:5000/books/16?page=2
 ```
 ```json
@@ -201,7 +204,8 @@ Returns:
 * Updated book id, success value.
 
 
-Sample: ```curl
+Sample: 
+```curl
 curl http://127.0.0.1:5000/books/15 -X PATCH -H "Content-Type: application/json" -d '{"rating":"1"}'
 ```
 ```json

@@ -92,12 +92,28 @@ def create_app(test_config=None):
         title = body.get('title', None)
         author = body.get('author', None)
         rating = body.get('rating', None)
+        search = body.get("search", None)
         try:
-            book = Book(title=title, author=author, rating=rating)
-            book.insert()
+            if search:
+                selection = Book.query.order_by(Book.id).filter(
+                    Book.title.ilike("%{}%".format(search))
+                )
+                paginated_books = paginate_books(request, selection)
 
-            books = Book.query.order_by(id).all()
-            paginated_books = paginate_books(request, books)
+                return jsonify(
+                    {
+                        "success": True,
+                        "books": paginated_books,
+                        "total_books": len(selection.all()),
+                    }
+                )
+
+            else:
+                book = Book(title=title, author=author, rating=rating)
+                book.insert()
+
+                books = Book.query.order_by(id).all()
+                paginated_books = paginate_books(request, books)
 
             return jsonify({
                 'success': True,

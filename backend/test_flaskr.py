@@ -34,11 +34,6 @@ class BookTestCase(unittest.TestCase):
         pass
 
 
-# @TODO: Write at least two tests for each endpoint - one each for success and error behavior.
-#        You can feel free to write additional tests for nuanced functionality,
-#        Such as adding a book without a rating, etc.
-#        Since there are four routes currently, you should have at least eight tests.
-# Optional: Update the book information in setUp to make the test database your own!
 
 # Test paginated books
     def test_paginated_books(self):
@@ -115,6 +110,24 @@ class BookTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'method not allowed')
 
+    def test_search_book(self):
+        res = self.client().get('/books', json={"search": "Novel"})
+        data = json.loads(res.data)
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(data['total_books'])
+        self.assertTrue(len(data['books']))
+    
+    def test_get_book_search_without_results(self):
+        res = self.client().post("/books", json={"search": "applejacks"})
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data["success"], True)
+        self.assertEqual(data["total_books"], 0)
+        self.assertEqual(len(data["books"]), 0)
+        
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
